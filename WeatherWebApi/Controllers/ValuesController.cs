@@ -23,17 +23,12 @@ namespace WeatherWebApi.Controllers
                 string URLString = "https://data.buienradar.nl/1.0/feed/xml";
                 DataSet ds = new DataSet();
                 ds.ReadXml(URLString);
-                var doc = XDocument.Load(URLString);
-                XmlTextReader reader = new XmlTextReader(URLString);
-                
                 DataRow[] foundRows;
                 foundRows = ds.Tables["weerstation"].Select("lat='" + Lat + "' and lon='" + Lon + "'");
-                
-
-
                 var temp = foundRows[0].ItemArray[6];
                 return temp.ToString(); 
             }
+
             catch (Exception ex)
             {
                 return "Error";
